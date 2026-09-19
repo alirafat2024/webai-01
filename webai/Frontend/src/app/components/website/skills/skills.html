@@ -1,0 +1,5 @@
+<section class="site-section">
+	<span class="site-kicker">Expertise</span>
+	<h2>{{ data['title'] || 'Skills' }}</h2>
+	<div class="skill-list"><span *ngFor="let skill of ($any(data['items']) || [])">{{ skill }}</span></div>
+</section>

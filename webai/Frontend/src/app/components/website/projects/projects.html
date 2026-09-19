@@ -1,0 +1,8 @@
+<section class="site-section">
+	<span class="site-kicker">Selected work</span>
+	<h2>{{ data['title'] || 'Projects' }}</h2>
+	<div class="project-list"><article *ngFor="let project of ($any(data['projects']) || [])">
+		<strong>{{ $any(project)['title'] || project }}</strong>
+		<p>{{ $any(project)['description'] }}</p>
+	</article></div>
+</section>

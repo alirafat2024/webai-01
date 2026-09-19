@@ -1,0 +1,203 @@
+<div class="min-h-screen overflow-hidden bg-[#08090d] text-white">
+  <!-- Background -->
+  <div class="pointer-events-none fixed inset-0">
+    <div
+      class="absolute left-1/2 top-[-300px] h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-violet-600/20 blur-[140px]"
+    ></div>
+
+    <div
+      class="absolute bottom-[-200px] left-[-100px] h-[400px] w-[400px] rounded-full bg-blue-600/10 blur-[120px]"
+    ></div>
+
+    <div
+      class="absolute right-[-100px] top-[400px] h-[400px] w-[400px] rounded-full bg-fuchsia-600/10 blur-[120px]"
+    ></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2">
+      <div
+        class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 shadow-lg shadow-violet-500/20"
+      >
+        <span class="text-lg font-bold">✦</span>
+      </div>
+
+      <span class="text-lg font-semibold tracking-tight">
+        Web<span class="text-violet-400">AI</span>
+      </span>
+    </a>
+
+    <!-- Navigation -->
+    <div class="hidden items-center gap-8 text-sm text-gray-400 md:flex">
+      <a href="#features" class="transition hover:text-white"> Home </a>
+
+      <a href="#how-it-works" class="transition hover:text-white"> About </a>
+
+      <a href="#showcase" class="transition hover:text-white"> Pricing </a>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3">
+      <button class="hidden px-4 py-2 text-sm text-gray-300 transition hover:text-white sm:block">
+        Sign in
+      </button>
+
+      <button
+        class="rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-black transition hover:bg-gray-200"
+      >
+        Get started
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <main class="relative z-10">
+    <section class="mx-auto max-w-5xl px-6 pb-20 pt-20 text-center md:pt-28">
+      <!-- Badge -->
+      <div
+        class="mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-gray-300 backdrop-blur"
+      >
+        <span class="flex h-2 w-2 rounded-full bg-emerald-400"></span>
+
+        AI-powered website builder
+
+        <span class="text-gray-600">•</span>
+
+        No coding required
+      </div>
+
+      <!-- Heading -->
+      <h6
+        class="mx-auto max-w-4xl  font-semibold leading-[1.05] tracking-tight sm:text-4xl md:text-3xl"
+      >
+        Turn your idea into a
+        <span
+          class="bg-gradient-to-r from-violet-200 via-fuchsia-200 to-blue-200 bg-clip-text text-transparent"
+        >
+          beautiful website.
+        </span>
+      </h6>
+
+      <!-- Description -->
+      <p class="mx-auto mt-7 max-w-2xl text-sm leading-8 text-gray-400">
+        Describe the website you want and let AI create the design, structure, and content for you.
+        Edit it. Preview it. Make it yours.
+      </p>
+
+      <!-- Prompt Box -->
+      <div class="mx-auto mt-10 max-w-3xl">
+        <div
+          class="rounded-2xl border border-white/10 bg-white/[0.045] p-2 shadow-2xl shadow-violet-950/30 backdrop-blur-xl"
+        >
+          <div class="rounded-xl bg-[#101116] p-5 text-left">
+            <!-- Prompt label -->
+            <div class="mb-4 flex items-center gap-2 text-sm text-gray-400">
+              <span class="text-violet-400">✦</span>
+              What do you want to build?
+            </div>
+
+            <!-- Textarea -->
+            <textarea
+              [(ngModel)]="prompt"
+              rows="3"
+              placeholder="Create a modern portfolio for a software developer..."
+              class="w-full resize-none bg-transparent text-base leading-7 text-white outline-none placeholder:text-gray-600"
+            ></textarea>
+
+            <!-- Bottom -->
+            <div class="mt-5 flex items-center justify-between">
+              <div class="hidden items-center gap-4 text-xs text-gray-500 sm:flex">
+                <span>⌘ Enter</span>
+                <span>AI will generate your website</span>
+              </div>
+
+              <button
+                (click)="generateWebsite(prompt)"
+                [disabled]="loading || !prompt.trim()"
+                class="ml-auto flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold shadow-lg shadow-violet-500/20 transition hover:scale-[1.02] hover:shadow-violet-500/30"
+              >
+               
+                {{ loading ? 'Generating...' : 'Generate website' }}
+                <span class="text-base">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Small features -->
+        <div
+          class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-gray-500"
+        >
+          <span class="flex items-center gap-2">
+            <span class="text-emerald-400">✓</span>
+            No coding
+          </span>
+
+          <span class="flex items-center gap-2">
+            <span class="text-emerald-400">✓</span>
+            AI generated
+          </span>
+
+          <span class="flex items-center gap-2">
+            <span class="text-emerald-400">✓</span>
+            Live preview
+          </span>
+
+          <span class="flex items-center gap-2">
+            <span class="text-emerald-400">✓</span>
+            Fully customizable
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- projects  -->
+    <section class="mx-auto max-w-4xl px-6 py-6 text-center">
+      <div
+        class="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] px-6 py-16"
+      >
+        <h2 class="text-2xl font-semibold mb-8">Your Projects</h2>
+        <div *ngIf="projectsLoading" class="text-gray-400">Loading projects...</div>
+        
+        <div *ngIf="!projectsLoading && projects.length === 0" class="text-gray-400">
+          No projects yet. Create your first project above!
+        </div>
+        
+        <div *ngIf="!projectsLoading && projects.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div *ngFor="let project of projects" 
+               (click)="openProject(project.projectId)"
+               class="cursor-pointer rounded-xl border border-white/10 bg-white/[0.02] p-6 transition hover:border-violet-500/50 hover:bg-white/[0.05]">
+            <div class="mb-4 flex h-32 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20">
+             <img src="/project-image.png" alt="">
+            </div>
+            <h3 class="text-lg font-semibold text-white">{{ project.name }}</h3>
+            <p class="mt-2 text-sm text-gray-400 truncate">{{ project.prompt }}</p>
+            <div class="mt-3 flex items-center justify-between text-xs text-gray-500">
+              <span>{{ project.status }}</span>
+              <span>{{ formatDate(project.createdAt) }}</span>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5">
+      <div
+        class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-gray-600 sm:flex-row"
+      >
+        <div>© 2026 WebAI</div>
+
+        <div class="flex gap-6">
+          <span>Privacy</span>
+          <span>Terms</span>
+          <span>GitHub</span>
+        </div>
+    
+      </div>
+    </footer>
+  </main>
+</div>

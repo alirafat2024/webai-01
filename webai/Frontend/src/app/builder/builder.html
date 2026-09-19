@@ -1,0 +1,111 @@
+<main class="builder-shell">
+  <aside class="chat-panel">
+    <header class="chat-header">
+      <mat-icon aria-hidden="false" aria-label="Back icon" fontIcon="arrow_back" (click)="goHome()">
+      </mat-icon>
+
+      <div>
+        <strong>AI Website Builder</strong>
+        <small><i></i> Ready to build</small>
+      </div>
+    </header>
+    <section class="conversation" aria-live="polite">
+      <div class="justify-center items-center">
+        <div class="welcome" *ngIf="messages.length === 0">
+          <div class="welcome-mark">✦</div>
+          <h1>What would you like to build?</h1>
+          <p>Describe a website and WebAI will shape the first draft for you.</p>
+        </div>
+        <div
+          class="message"
+          *ngFor="let message of messages"
+          [class.user-message]="message.role === 'user'"
+        >
+          <p>{{ message.content }}</p>
+        </div>
+
+        <div class="message assistant-message" *ngIf="loading">
+          <p class="typing">Building your website <span>● ● ●</span></p>
+        </div>
+      </div>
+    </section>
+    <form class="prompt-form" (ngSubmit)="submitPrompt()">
+      <textarea
+        [(ngModel)]="prompt"
+        name="prompt"
+        rows="3"
+        (keydown)="onPromptKeydown($event)"
+        [disabled]="!projectRunning || loading"
+        [placeholder]="getPlaceholder()"
+      ></textarea>
+      <button type="submit" [disabled]="loading || !prompt.trim() || !projectRunning">
+        <mat-icon aria-hidden="false" aria-label="Send" fontIcon="send" />
+      </button>
+      <p>
+        <small>Enter to send · Shift + Enter for a new line</small>
+      </p>
+    </form>
+  </aside>
+
+  <section class="preview-panel">
+    <div class="project-controls" *ngIf="projectId">
+      <button
+        type="button"
+        (click)="startProject()"
+        [disabled]="projectRunning || loading"
+        class="control-btn run-btn"
+      >
+        {{
+          projectStatus === 'starting' ? 'Starting...' : projectRunning ? 'Running' : 'Run Project'
+        }}
+      </button>
+      <button
+        type="button"
+        (click)="stopProject()"
+        [disabled]="!projectRunning"
+        class="control-btn stop-btn"
+      >
+        Stop
+      </button>
+      <button
+        type="button"
+        (click)="forceRefreshPreview()"
+        [disabled]="!projectRunning"
+        class="control-btn refresh-btn"
+      >
+       Refresh
+      </button>
+    </div>
+    <div class="browser-stage">
+      <div class="fake-browser" [class]="'fake-browser ' + previewMode">
+        <div class="browser-bar">
+          <div class="browser-dots"><i></i><i></i><i></i></div>
+          <div class="address">{{ projectPreviewDisplayUrl || 'preview.local' }}</div>
+        </div>
+        <div class="browser-content">
+          <iframe
+            *ngIf="projectPreviewUrl"
+            [src]="projectPreviewUrl"
+            class="project-iframe"
+            title="Project Preview"
+            (load)="onIframeLoad()"
+            (error)="onIframeError()"
+            sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals"
+            allow="accelerometer; camera; encrypted-media; geolocation; gyroscope; microphone"
+            referrerpolicy="no-referrer"
+          ></iframe>
+          <app-renderer *ngIf="!projectPreviewUrl" [website]="website"></app-renderer>
+          <div class="preview-loading" *ngIf="projectStatus === 'initializing'">
+            <span>✦</span><strong>Initializing project...</strong>
+          </div>
+          <div class="preview-loading" *ngIf="projectStatus === 'starting'">
+            <span>✦</span><strong>Starting project and installing dependencies...</strong>
+          </div>
+          <div class="preview-error" *ngIf="iframeError && projectRunning">
+            <span>⚠</span><strong>{{ iframeError }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

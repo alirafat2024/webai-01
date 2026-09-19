@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+import { Input } from '@angular/core';
+
+@Component({
+  imports: [],
+  selector: 'app-contact',
+  styleUrl: './contact.css',
+  templateUrl: './contact.html',
+})
+export class Contact {
+  @Input() data: Record<string, unknown> = {};
+}

@@ -1,0 +1,15 @@
+<div class="website" *ngIf="website as currentWebsite" [style.backgroundColor]="currentWebsite.theme.backgroundColor"
+	[style.color]="currentWebsite.theme.textColor" [style.--primary-color]="currentWebsite.theme.primaryColor">
+	<ng-container *ngFor="let section of currentWebsite.sections">
+		<app-hero *ngIf="section.type === 'hero'" [data]="section.data" [siteTitle]="currentWebsite.site.title"></app-hero>
+		<app-about *ngIf="section.type === 'about'" [data]="section.data"></app-about>
+		<app-skills *ngIf="section.type === 'skills'" [data]="section.data"></app-skills>
+		<app-projects *ngIf="section.type === 'projects'" [data]="section.data"></app-projects>
+		<app-contact *ngIf="section.type === 'contact'" [data]="section.data"></app-contact>
+	</ng-container>
+</div>
+<div class="empty-preview" *ngIf="!website">
+	<span>✦</span>
+	<strong>Your website will appear here</strong>
+	<p>Describe what you want to build in the chat to get started.</p>
+</div>
